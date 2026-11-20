@@ -120,7 +120,13 @@ These are enforced in review, not by a linter, so please self-check:
 
 Follow the existing style: `#given` / `#when` / `#then` comments, one logical assertion per test, descriptive names. Cover the failure path, not just the happy one.
 
-Note that provider tests currently only validate manifest shape. If your change touches the payment path, say on the PR how you verified it — a `curl` against `pnpm dev` showing the 402 challenge is worth more than a green unit test here.
+The provider `test` script (`tsx --test "src/**/*.test.ts"`) discovers more than manifest shape. It also runs the Worker request tests and the session-writer / Durable Object recovery tests, so request and settlement changes have local coverage:
+
+- **Manifest shape** — `apps/provider-*/src/manifest.test.ts` validates the manifest against the schema with `ajv`.
+- **Worker request behavior** — the `*.test.ts` files under `apps/provider-*/src/` exercise the request handler (challenge, verification, and error paths) against the Worker entrypoint.
+- **Session writer / Durable Object recovery** — the `ChannelSession` and session-writer tests cover persistence and recovery of in-flight sessions.
+
+Run them with `pnpm --filter provider-a test` (or `provider-b`). These are local checks only: they do not touch a live Stellar account or settle real payments. If your change touches the payment path, say on the PR how you verified it — a `curl` against `pnpm dev` showing the 402 challenge is worth more than a green unit test here.
 
 ## Opening a PR
 
