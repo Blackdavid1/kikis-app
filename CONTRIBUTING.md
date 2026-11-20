@@ -50,21 +50,23 @@ someone else's problem.
 If you would rather run the steps individually:
 
 ```bash
-# 1. Types across every package
+# 1. Build the SDK packages first — consumers resolve their dist/ output
+pnpm --filter @kikis-app/nulth-sdk build
+pnpm --filter @kikis-app/kikis-app build
+
+# 2. Types across every package
 pnpm -r typecheck
 
-# 2. Tests
+# 3. Tests
 pnpm --filter @kikis-app/kikis-app test
 pnpm --filter @kikis-app/mcp-server test
 pnpm --filter provider-a test
 pnpm --filter provider-b test
 
-# 3. Builds — for the two providers this bundles a real Workers script
-pnpm --filter @kikis-app/nulth-sdk build
-pnpm --filter @kikis-app/kikis-app build
+# 4. Remaining builds — for the two providers this bundles a real Workers script
 pnpm -r --filter '!@kikis-app/nulth-sdk' --filter '!@kikis-app/kikis-app' build
 
-# 4. Contracts, only if you touched contracts/
+# 5. Contracts, only if you touched contracts/
 cargo test --manifest-path contracts/agent-vault/Cargo.toml
 cargo test --manifest-path contracts/agent-vault/Cargo.toml --features testutils
 ```
