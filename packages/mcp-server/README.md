@@ -48,6 +48,17 @@ SUPABASE_URL="https://..."
 SUPABASE_KEY="..."
 ```
 
+### Environment Variables
+
+| Variable | Required | Unit / Notes |
+| --- | --- | --- |
+| `STELLAR_SECRET` | Yes | Stellar secret key (`S...`). Use a dedicated low-balance testnet key for safety. |
+| `STELLAR_NETWORK` | Yes | `testnet` or `mainnet`. |
+| `KIKIS_APP_DAILY_CAP` | Yes | Maximum daily spend in **USDC**, as a decimal string (e.g. `"1.00"`). The server exits with status 1 at startup if this is unset. |
+| `COMMITMENT_SECRET` | No | Ed25519 secret for channel commitments (session mode). |
+| `SUPABASE_URL` | No | Provider registry URL. |
+| `SUPABASE_KEY` | No | Provider registry anon key (not the service-role key). |
+
 ## Available Tools
 
 ### pay_for_data
@@ -132,6 +143,27 @@ Add this to your Claude Desktop config file:
       "args": ["/path/to/@kikis-app/mcp-server/dist/index.js"],
       "env": {
         "KIKIS_APP_ENV_FILE": "/absolute/path/to/your/.env"
+      }
+    }
+  }
+}
+```
+
+If you prefer to supply the environment inline instead of via `KIKIS_APP_ENV_FILE`, `KIKIS_APP_DAILY_CAP` is still required — the server exits with status 1 at startup when it is unset:
+
+```json
+{
+  "mcpServers": {
+    "kikis-app": {
+      "command": "node",
+      "args": ["/path/to/@kikis-app/mcp-server/dist/index.js"],
+      "env": {
+        "STELLAR_SECRET": "S...",
+        "STELLAR_NETWORK": "testnet",
+        "KIKIS_APP_DAILY_CAP": "1.00",
+        "COMMITMENT_SECRET": "S...",
+        "SUPABASE_URL": "https://...",
+        "SUPABASE_KEY": "..."
       }
     }
   }
