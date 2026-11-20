@@ -80,7 +80,7 @@ check against the provider's `min_deposit`, not a fund transfer. Pass the return
 `stream_session` and `close_session` — the channel's collateral cannot be settled otherwise.
 
 **Parameters:**
-- `url` (required): Base URL of the provider
+- `url` (required): Full URL of the provider's streaming endpoint — include the stream route, not just the base URL. For Provider B this is `https://api-b.kikis-app.xyz/stream/orderbook` (see its manifest `endpoints.stream.path`). The URL is forwarded to the SDK as-is, so custom provider paths are preserved.
 - `initial_deposit` (optional): Amount in USDC you intend the channel to be funded with
 
 **Returns:** `channel_id` and open transaction hash
@@ -177,7 +177,7 @@ Once configured, you can ask Claude to:
 > "Check my Stellar balance"
 > "List providers that offer price data"
 > "Pay for data from https://api-a.kikis-app.xyz/price with a max of 0.01 USDC"
-> "Open a session with https://api-b.kikis-app.xyz for streaming orderbook data"
+> "Open a session with https://api-b.kikis-app.xyz/stream/orderbook for streaming orderbook data"
 > "Pull the next few messages from that session"
 > "Close the session and settle the channel"
 
