@@ -7,7 +7,20 @@ Smart contracts for KikisApp on Stellar.
 The KikisApp agent vault is a Soroban smart contract account built on top of
 [Crossmint/stellar-smart-account](https://github.com/Crossmint/stellar-smart-account) v1.0.0.
 
-**Status:** Not yet scaffolded. Requires Rust + Soroban SDK setup.
+**Status:** Implemented and checked in. The contract source lives in
+[`agent-vault/src/lib.rs`](agent-vault/src/lib.rs) (including the `AgentVault`
+`__constructor`) and the crate manifest is
+[`agent-vault/Cargo.toml`](agent-vault/Cargo.toml). Tests are in
+[`agent-vault/src/test.rs`](agent-vault/src/test.rs).
+
+### Local build & test
+
+Run from `contracts/agent-vault`:
+
+```bash
+cargo build
+cargo test
+```
 
 ### Policies (Phase 1 implementation)
 
