@@ -413,3 +413,6 @@ MIT
 
 <!-- handsoff-issue-64 -->
 - #64: [Contracts] Implement Contract View Function for Current Daily Spend and Remaining Allowance
+
+<!-- handsoff-issue-218 -->
+- #218: [MPP Session] Validate Stream Concurrency Before Allocating the Request Window
