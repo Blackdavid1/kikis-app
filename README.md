@@ -413,3 +413,6 @@ MIT
 
 <!-- handsoff-issue-64 -->
 - #64: [Contracts] Implement Contract View Function for Current Daily Spend and Remaining Allowance
+
+<!-- handsoff-issue-260 -->
+- #260: [SDK] Make HTTP Request Option Types Reflect Their Actual Width
