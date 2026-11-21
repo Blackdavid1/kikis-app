@@ -42,7 +42,9 @@ const HORIZON_URL =
     ? 'https://horizon-testnet.stellar.org'
     : 'https://horizon.stellar.org'
 
-const EXPLORER_BASE = `https://stellar.expert/explorer/${STELLAR_NETWORK}/tx`
+// Stellar Expert identifies mainnet as "public" in its explorer path.
+const EXPLORER_PATH = STELLAR_NETWORK === 'mainnet' ? 'public' : 'testnet'
+const EXPLORER_BASE = `https://stellar.expert/explorer/${EXPLORER_PATH}/tx`
 
 // Canonical USDC issuer for the active network — must match the SDK's expectation.
 const USDC_ISSUER = USDC_ISSUERS[STELLAR_NETWORK]
